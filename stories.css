@@ -1,0 +1,561 @@
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: "Outfit", sans-serif;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .hero {
+      height: 70vh;
+      background: url("images/7.jpeg") center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: white;
+      font-weight: 400;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .scroll-dot {
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      margin-top: 20px;
+    }
+
+    /* ============================= */
+    /* STORIES SECTION */
+    /* ============================= */
+
+    .stories-section {
+      background: #fff;
+      color: #000;
+      padding: 80px 5%;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .stories-section .tabs {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .stories-section .tab {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      padding-bottom: 5px;
+      color: #666;
+      transition: color 0.3s ease;
+      font-family: "Outfit", sans-serif;
+    }
+
+    .stories-section .tab.active {
+      border-bottom: 2px solid #000;
+      color: #000;
+    }
+
+    .stories-section .tab-content {
+      display: none;
+      width: 100%;
+    }
+
+    .stories-section .tab-content.active {
+      display: block;
+    }
+
+    /* ============================= */
+    /* GRID STYLES */
+    /* ============================= */
+
+    .stories-section .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    /* ============================= */
+    /* CARD STYLES */
+    /* ============================= */
+
+    .stories-section .card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .stories-section .card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .stories-section .card h3 {
+      padding: 1.5rem 0.5rem 1.5rem 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .stories-section .card:hover {
+      transform: translateY(-10px);
+    }
+
+    /* ============================= */
+    /* EVENTS SECTION */
+    /* ============================= */
+
+    .stories-section #events .grid {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+    }
+
+    .stories-section .card1 {
+      background-color: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s ease, border-color 0.4s ease;
+      height: 100%;
+    }
+
+    .stories-section .card1:hover {
+      transform: translateY(-10px);
+      border-color: #d4af37;
+    }
+
+    .card-image-wrapper {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .card-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .stories-section .card1:hover .card-image-wrapper img {
+      transform: scale(1.1);
+    }
+
+    .event-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #d4af37;
+      color: #000;
+      padding: 5px 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+    .event-date {
+      color: #d4af37;
+      font-size: 0.8rem;
+      display: block;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .card-body h3 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 15px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .card-body p {
+      color: #aaa;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+
+    .read-more {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 3px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .read-more:hover {
+      color: #d4af37;
+      padding-left: 5px;
+    }
+
+    /* ============================= */
+    /* WINE SELECTION */
+    /* ============================= */
+
+    .stories-section .wine-selection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .product-item {
+      border: 1px solid rgba(198, 167, 94, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.4s ease;
+      text-align: center;
+      cursor: pointer;
+      background: #000;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-item:hover {
+      transform: translateY(-12px);
+      border-color: #c6a75e;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-visual {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), #000);
+    }
+
+    .product-visual img {
+      max-width: 100%;
+      height: auto;
+      max-height: 250px;
+      width: auto;
+      transition: transform 0.5s ease;
+      object-fit: contain;
+    }
+
+    .product-item:hover .product-visual img {
+      transform: scale(1.05);
+    }
+
+    .product-details {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wine-label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #c6a75e;
+      margin-bottom: 0.8rem;
+    }
+
+    .product-details h3 {
+      font-family: "Outfit", sans-serif;
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .product-details p {
+      font-size: 0.65rem;
+      color: #aaa;
+      line-height: 1.6;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    /* ============================= */
+    /* RESPONSIVE STYLES */
+    /* ============================= */
+
+    /* Large Tablets */
+    @media screen and (max-width: 1024px) {
+      .stories-section .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+      }
+
+      .stories-section #events .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-body h3 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Medium Tablets */
+    @media screen and (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .stories-section {
+        padding: 60px 4%;
+      }
+
+      .stories-section .tabs {
+        gap: 25px;
+        margin-bottom: 40px;
+        justify-content: center;
+      }
+
+      .stories-section .tab {
+        font-size: 0.95rem;
+      }
+
+      .stories-section .grid,
+      .stories-section #events .grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .stories-section .wine-selection-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .product-visual {
+        padding: 1.5rem;
+      }
+
+      .product-details {
+        padding: 1.5rem;
+      }
+
+      .product-details h3 {
+        font-size: 1.4rem;
+      }
+
+      .card-body {
+        padding: 25px;
+      }
+
+      .card-body h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Mobile Landscape */
+    @media screen and (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .stories-section .wine-selection-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .product-visual img {
+        max-height: 200px;
+      }
+    }
+
+    /* Mobile Portrait */
+    @media screen and (max-width: 480px) {
+      .hero {
+        height: 60vh;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        padding: 0 15px;
+      }
+
+      .stories-section {
+        padding: 40px 4%;
+      }
+
+      .stories-section .tabs {
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .stories-section .tab {
+        font-size: 0.85rem;
+        padding-bottom: 3px;
+      }
+
+      .stories-section .grid,
+      .stories-section #events .grid {
+        gap: 25px;
+      }
+
+      .stories-section .card h3 {
+        font-size: 1rem;
+        padding: 1rem 0.5rem 1rem 0;
+      }
+
+      .card-image-wrapper {
+        height: 250px;
+      }
+
+      .card-body {
+        padding: 20px;
+      }
+
+      .card-body h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+
+      .card-body p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+
+      .event-date {
+        font-size: 0.75rem;
+      }
+
+      .event-tag {
+        top: 15px;
+        left: 15px;
+        padding: 4px 12px;
+        font-size: 0.65rem;
+      }
+
+      .product-visual {
+        padding: 1.2rem;
+      }
+
+      .product-details {
+        padding: 1.2rem;
+      }
+
+      .product-details h3 {
+        font-size: 1.3rem;
+      }
+
+      .product-details p {
+        font-size: 0.9rem;
+      }
+
+      .wine-label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+      }
+
+      .read-more {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Small Mobile */
+    @media screen and (max-width: 360px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .stories-section .tabs {
+        gap: 10px;
+      }
+
+      .stories-section .tab {
+        font-size: 0.8rem;
+      }
+
+      .card-body h3 {
+        font-size: 1.2rem;
+      }
+
+      .product-details h3 {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Fix for grid on very small devices */
+    @media screen and (max-width: 320px) {
+      .stories-section .grid,
+      .stories-section #events .grid,
+      .stories-section .wine-selection-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Ensure images don't overflow */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Fix for header container */
+    #header-container {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    #footer-container {
+      width: 100%;
+      overflow-x: hidden;
+    }
+  

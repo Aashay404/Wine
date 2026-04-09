@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact | SamWine Estate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================
+   SCOPED CONTACT PAGE ONLY
+   ============================ */
+
+.sam-contact-page {
+  --gold:#d4af37;
+  --gold-soft:#e6c76b;
+  --gold-dark:#9c7c2b;
+  --black:#070707;
+  --black-deep:#040404;
+  --black-soft:#111;
+  --text-soft:rgba(255,255,255,.75);
+  --border:rgba(212,175,55,.25);
+  --error:#e05555;
+  --success:#4caf7d;
+
+  background: linear-gradient(to bottom,var(--black),var(--black-deep));
+  color:#fff;
+  font-family:"Outfit", sans-serif;
+}
+
+/* HERO */
+
+.sam-contact-page .hero{
+  height:65vh;
+  background:
+  linear-gradient(to bottom,rgba(0,0,0,.4),rgba(0,0,0,.85)),
+  url("./images/rectanglesize6.png") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.sam-contact-page .hero h1{
+  font-size:4rem;
+  font-weight:500;
+  letter-spacing:4px;
+}
+
+.sam-contact-page .hero span{
+  display:block;
+  margin-top:18px;
+  font-size:12px;
+  letter-spacing:6px;
+  color:var(--gold-soft);
+}
+
+/* CONTACT SECTION */
+
+.sam-contact-page .contact-section{
+  max-width:1300px;
+  margin:auto;
+  padding: 12px 40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:120px;
+}
+
+/* INFO */
+
+.sam-contact-page .contact-info h2{
+  font-size:3rem;
+  font-weight:500;
+  margin-bottom:25px;
+}
+
+.sam-contact-page .contact-info p{
+  color:var(--text-soft);
+  line-height:1.9;
+  margin-bottom:60px;
+  max-width:480px;
+}
+
+.sam-contact-page .info-block{
+  margin-bottom:35px;
+}
+
+.sam-contact-page .info-block span{
+  display:block;
+  color:var(--gold-soft);
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
+
+.sam-contact-page .info-block div{
+  font-size:16px;
+  opacity:.9;
+}
+
+.sam-contact-page .info-block a{
+  color:#fff;
+  text-decoration:none;
+}
+
+.sam-contact-page .info-block a:visited,
+.sam-contact-page .info-block a:hover,
+.sam-contact-page .info-block a:active{
+  color:#fff;
+}
+
+/* FORM */
+
+.sam-contact-page .contact-form{
+  background:var(--black-soft);
+  padding:60px;
+  border:1px solid var(--border);
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+}
+
+.sam-contact-page .form-group{
+  margin-bottom:40px;
+  position: relative;
+}
+
+.sam-contact-page .contact-form label{
+  display:block;
+  font-size:11px;
+  letter-spacing:3px;
+  color:var(--gold-soft);
+  margin-bottom:12px;
+}
+
+.sam-contact-page .contact-form input,
+.sam-contact-page .contact-form textarea{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding:14px 0;
+  color:#fff;
+  font-size:14px;
+  outline:none;
+  transition:.4s;
+  box-sizing: border-box;
+}
+
+.sam-contact-page .contact-form input:focus,
+.sam-contact-page .contact-form textarea:focus{
+  border-color:var(--gold);
+}
+
+.sam-contact-page .contact-form input.is-error,
+.sam-contact-page .contact-form textarea.is-error{
+  border-color: var(--error);
+}
+
+.sam-contact-page .contact-form input.is-valid,
+.sam-contact-page .contact-form textarea.is-valid{
+  border-color: var(--success);
+}
+
+.sam-contact-page .contact-form textarea{
+  resize:none;
+  height: 45px;
+}
+
+/* VALIDATION MESSAGES */
+
+.sam-contact-page .field-error {
+  display: none;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--error);
+  margin-top: 7px;
+  transition: all .3s ease;
+}
+
+.sam-contact-page .field-error.visible {
+  display: block;
+  animation: fadeInDown .25s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* BUTTON */
+
+.sam-contact-page .contact-form button{
+  margin-top:30px;
+  padding:16px 50px;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold-soft);
+  font-size:12px;
+  letter-spacing:4px;
+  cursor:pointer;
+  transition:.4s ease;
+}
+
+.sam-contact-page .contact-form button:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+/* SUCCESS TOAST */
+
+.sam-contact-page .toast {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--success);
+  color: #fff;
+  padding: 14px 36px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  z-index: 9999;
+  animation: fadeInUp .4s ease;
+}
+
+.sam-contact-page .toast.show { display: block; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* MAP */
+
+.sam-contact-page .map{
+  margin-top:100px;
+  height:450px;
+  filter:grayscale(100%) contrast(1.1);
+  border-top:1px solid var(--border);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+  .sam-contact-page .contact-section{
+    grid-template-columns:1fr;
+    gap:80px;
+    padding:100px 30px;
+  }
+
+  .sam-contact-page .hero h1{
+    font-size:2.6rem;
+  }
+}
+html, body {
+  height: auto !important;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+}
+</style>
+</head>
+
+<body>
+
+<div id="header-container"></div>
+
+<!-- WRAPPER START -->
+<div class="sam-contact-page">
+
+<section class="hero">
+  <div>
+    <h1>Contact Us</h1>
+    <span>SAMWINE ESTATE</span>
+  </div>
+</section>
+
+<section class="contact-section">
+
+  <div class="contact-info">
+    <h2>Let's Plan Something<br>Extraordinary</h2>
+    <p>
+      Whether you're planning a private tasting, destination wedding,
+      or executive retreat, our estate team will curate a refined experience
+      tailored exclusively to you.
+    </p>
+
+    <div class="info-block">
+      <span>PHONE</span>
+      <div>(805) 555-WINE</div>
+    </div>
+
+    <div class="info-block">
+      <span>EMAIL</span>
+      <div><a href="mailto:contact@samsfruitwines.com">contact@samsfruitwines.com</a></div>
+    </div>
+
+    <div class="info-block">
+      <span>LOCATION</span>
+      <div>Gate No. 85, Korhate Village,
+Taluka Dindori, Nashik – 422202</div>
+    </div>
+
+    <div class="info-block">
+      <span>HOURS</span>
+      <div>Daily · 10 AM — 6 PM</div>
+    </div>
+  </div>
+
+  <form class="contact-form" id="contactForm" novalidate>
+
+    <div class="form-group">
+      <label>FULL NAME</label>
+      <input type="text" id="fullName" placeholder="Your Name" autocomplete="off">
+      <div class="field-error" id="fullNameError">Only alphabets and spaces are allowed.</div>
+    </div>
+
+    <div class="form-group">
+      <label>MOBILE NUMBER</label>
+      <input type="tel" id="mobile" placeholder="e.g. 9876543210" autocomplete="off" maxlength="10">
+      <div class="field-error" id="mobileError">Enter a valid 10-digit Indian mobile number (starts with 6, 7, 8, or 9).</div>
+    </div>
+
+    <div class="form-group">
+      <label>EMAIL</label>
+      <input type="email" id="email" placeholder="Your Email" autocomplete="off">
+      <div class="field-error" id="emailError">Please enter a valid email address.</div>
+    </div>
+
+    <div class="form-group">
+      <label>EVENT TYPE</label>
+      <input type="text" id="eventType" placeholder="Wedding, Corporate, Private">
+      <div class="field-error" id="eventTypeError">Only alphabets, spaces, and commas are allowed.</div>
+    </div>
+
+    <div class="form-group">
+      <label>MESSAGE</label>
+      <textarea id="message" placeholder="Tell us about your event..."></textarea>
+      <div class="field-error" id="messageError">Please enter your message.</div>
+    </div>
+
+    <button type="submit">SEND INQUIRY</button>
+  </form>
+
+</section>
+
+<section class="map">
+  <iframe src="https://www.google.com/maps?q=california%20winery&output=embed"
+  width="100%" height="100%" style="border:0;"></iframe>
+</section>
+
+<div class="toast" id="successToast">INQUIRY SENT SUCCESSFULLY</div>
+
+</div>
+<!-- WRAPPER END -->
+
+<div id="footer-container"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ============================================================
+   FORM VALIDATION
+   ============================================================ */
+
+const rules = {
+  fullName: {
+    validate: v => /^[A-Za-z\s]{2,}$/.test(v.trim()),
+    errorId: 'fullNameError',
+    msg: 'Only alphabets and spaces are allowed (min 2 chars).'
+  },
+  mobile: {
+    validate: v => /^[6-9]\d{9}$/.test(v.trim()),
+    errorId: 'mobileError',
+    msg: 'Enter a valid 10-digit Indian mobile number (starts with 6, 7, 8, or 9).'
+  },
+  email: {
+    validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+    errorId: 'emailError',
+    msg: 'Please enter a valid email address.'
+  },
+  eventType: {
+    validate: v => v.trim() === '' || /^[A-Za-z\s,]+$/.test(v.trim()),
+    errorId: 'eventTypeError',
+    msg: 'Only alphabets, spaces, and commas are allowed.'
+  },
+  message: {
+    validate: v => v.trim().length >= 10,
+    errorId: 'messageError',
+    msg: 'Message must be at least 10 characters.'
+  }
+};
+
+/* Block non-numeric keypress on mobile field */
+document.getElementById('mobile').addEventListener('keypress', function(e) {
+  if (!/[0-9]/.test(e.key)) {
+    e.preventDefault();
+  }
+});
+
+/* Block non-alpha keypress on fullName field */
+document.getElementById('fullName').addEventListener('keypress', function(e) {
+  if (!/[A-Za-z\s]/.test(e.key)) {
+    e.preventDefault();
+  }
+});
+
+/* Block non-alpha keypress on eventType field */
+document.getElementById('eventType').addEventListener('keypress', function(e) {
+  if (!/[A-Za-z\s,]/.test(e.key)) {
+    e.preventDefault();
+  }
+});
+
+/* Inline validation on blur */
+Object.keys(rules).forEach(fieldId => {
+  const input = document.getElementById(fieldId);
+  if (!input) return;
+
+  input.addEventListener('blur', () => validateField(fieldId));
+  input.addEventListener('input', () => {
+    if (input.classList.contains('is-error')) validateField(fieldId);
+  });
+});
+
+function validateField(fieldId) {
+  const rule   = rules[fieldId];
+  const input  = document.getElementById(fieldId);
+  const errEl  = document.getElementById(rule.errorId);
+  const val    = input.value;
+
+  const isRequired = ['fullName', 'mobile', 'email', 'message'].includes(fieldId);
+  const isEmpty    = val.trim() === '';
+
+  if (isRequired && isEmpty) {
+    setError(input, errEl, 'This field is required.');
+    return false;
+  }
+
+  if (!isEmpty && !rule.validate(val)) {
+    setError(input, errEl, rule.msg);
+    return false;
+  }
+
+  clearError(input, errEl);
+  return true;
+}
+
+function setError(input, errEl, msg) {
+  input.classList.add('is-error');
+  input.classList.remove('is-valid');
+  errEl.textContent = msg;
+  errEl.classList.add('visible');
+}
+
+function clearError(input, errEl) {
+  input.classList.remove('is-error');
+  input.classList.add('is-valid');
+  errEl.classList.remove('visible');
+}
+
+/* Submit */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const requiredFields = ['fullName', 'mobile', 'email', 'message'];
+  const optionalFields = ['eventType'];
+  let allValid = true;
+
+  [...requiredFields, ...optionalFields].forEach(id => {
+    if (!validateField(id)) allValid = false;
+  });
+
+  if (allValid) {
+    const toast = document.getElementById('successToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+    this.reset();
+    document.querySelectorAll('.contact-form input, .contact-form textarea')
+      .forEach(el => el.classList.remove('is-valid', 'is-error'));
+  }
+});
+</script>
+
+<script>
+// Inject HTML and re-execute any <script> tags inside it
+// (innerHTML does NOT run scripts automatically)
+function injectHTML(containerId, html) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = html;
+  container.querySelectorAll('script').forEach(oldScript => {
+    const newScript = document.createElement('script');
+    newScript.textContent = oldScript.textContent;
+    document.body.appendChild(newScript);
+    oldScript.remove();
+  });
+}
+
+fetch('header.html')
+  .then(r => r.text())
+  .then(html => injectHTML('header-container', html))
+  .catch(err => console.error('Header load failed:', err));
+
+fetch('footer.html')
+  .then(r => r.text())
+  .then(html => injectHTML('footer-container', html))
+  .catch(err => console.error('Footer load failed:', err));
+</script>
+
+</body>
+</html>

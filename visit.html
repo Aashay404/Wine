@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Visit Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./visit.css">
+</head>
+<body>
+
+<!-- HEADER IMPORT -->
+<div id="header-container"></div>
+
+<script>
+// Import header.html
+fetch('header.html')
+  .then(response => response.text())
+  .then(data => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const nav = doc.querySelector('nav');
+    const menuOverlay = doc.querySelector('.menu-overlay');
+    const styles = doc.querySelector('style');
+    const scripts = doc.querySelector('script');
+    
+    if (styles) {
+      document.head.appendChild(styles);
+      setTimeout(() => {
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+      }, 100);
+    }
+    
+    if (nav) {
+      nav.style.background = 'transparent';
+      nav.style.backdropFilter = 'none';
+      
+      const menuToggleSpans = nav.querySelectorAll('.menu-toggle span');
+      menuToggleSpans.forEach(span => {
+        span.style.background = 'white';
+        span.style.display = 'block';
+      });
+    }
+    
+    document.getElementById('header-container').appendChild(nav);
+    document.getElementById('header-container').appendChild(menuOverlay);
+    
+    if (scripts) {
+      eval(scripts.textContent);
+    }
+  })
+  .catch(error => console.error('Error loading header:', error));
+</script>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Visit Our Winery</h1>
+    <span class="scroll-dot"></span>
+  </div>
+</section>
+
+<!-- LUXURY EDITORIAL SECTION -->
+<section class="luxury-editorial">
+  <div class="editorial-container">
+    <div class="main-image-area">
+      <img src="images/rectanglesize7.png" alt="Wine Experience" class="main-image">
+      <img src="images/sams wine8.png" alt="Orchards Landscape"   class="overlay-image">
+    </div>
+    <div class="editorial-content">
+      <span class="brand-label">Sam's Wine WINERY</span>
+      <h2 class="editorial-heading">
+        Where centuries of<br>
+        winemaking tradition<br>
+        create exceptional wines
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- LUXURY TASTING EXPERIENCE -->
+<section class="luxury-tasting">
+  <div class="tasting-tabs">
+    <button class="tasting-tab active" data-tab="wine">Wine Tasting</button>
+    <button class="tasting-tab" data-tab="legacy">Legacy Tasting</button>
+    <button class="tasting-tab" data-tab="Orchards">Orchards Tour</button>
+  </div>
+  
+  <div class="tasting-card">
+    <div class="tasting-content">
+      <span class="tasting-label">Taste. Learn. Discover</span>
+      <h2 class="tasting-heading">Wine Tasting</h2>
+      <p class="tasting-description">Step into our tasting room and explore the world of fruit and flower wines. Sample our seasonal releases, limited editions, and signature bottles, guided by our knowledgeable wine specialists who will walk you through the aromas, textures, and flavors that make each wine unique.</p>
+      <!-- <div class="tasting-price">$25 per person</div> -->
+      <div class="tasting-cta">Experience Includes: Wine tasting sessions, food pairings, and insights into our sustainable farming and winemaking process</div>
+      <div class="tasting-contact">
+        <span>✉️ tastings@Sam's Wine.com</span>
+      </div>
+    </div>
+    <div class="tasting-image">
+      <img src="images/jamun5.png" alt="Wine Tasting">
+    </div>
+  </div>
+</section>
+  
+
+<!-- BOTTOM PREMIUM HERO -->
+<section class="bottom-premium-hero">
+  <!-- Top Row -->
+  <div class="bottom-hero-top">
+    <div class="bottom-hero-image">
+      <img src="images/rectanglesize9.png" alt="Wine Cellar Experience" class="bottom-lifestyle-image">
+    </div>
+    <div class="bottom-hero-content">
+      <span class="bottom-hero-subtitle">DISCOVER OUR LEGACY</span>
+      <h2 class="bottom-hero-title">Orchard & Winery Experiences</h2>
+      <div class="bottom-hero-divider"></div>
+      <div class="bottom-hero-info">
+        <p style="font-size: 1.2rem;">
+            <strong>Cellar Tours</strong><br>
+            Guided Orchard Tours: Daily at 11 AM, 2 PM, 4 PM
+        Walk through our Orchards and flower gardens, learn about sustainable farming, and witness the care behind each harvest.
+        </p>
+      
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom Row -->
+  <div class="bottom-hero-bottom">
+    <div class="bottom-hero-landscape">
+      <img src="images/sams wine1.png" alt="Golden Hour Orchards" class="bottom-landscape-image">
+    </div>
+    <div class="bottom-hero-interior">
+      <img src="images/sams wine2.png" alt="Wine Barrel Room" class="bottom-interior-image">
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM SPLIT SECTION -->
+<section class="premium-split">
+  <div class="split-container">
+    <div class="image-card">
+      <div class="adventure-slide active">
+        <img src="images/pomebottle1.png" alt="Orchards Tours">
+        <div class="image-overlay">
+          <h3>Orchards TOURS</h3>
+          <p>Explore our historic Orchardss and winemaking process</p>
+          <a href="stories.html" class="learn-more">LEARN MORE →</a>
+        </div>
+      </div>
+      <div class="adventure-slide">
+        <img src="images/strawberrybottle1.png" alt="Wine Education">
+        <div class="image-overlay">
+          <h3>WINE EDUCATION</h3>
+          <p>Learn about terroir, varietals, and tasting techniques</p>
+          <a href="stories.html" class="learn-more">LEARN MORE →</a>
+        </div>
+      </div>
+      <div class="adventure-slide">
+        <img src="images/mahuabottle1.png" alt="Private Events">
+        <div class="image-overlay">
+          <h3>PRIVATE EVENTS</h3>
+          <p>Host memorable celebrations in our Orchards setting</p>
+          <a href="stories.html" class="learn-more">LEARN MORE →</a>
+        </div>
+      </div>
+      <button class="nav-button" onclick="changeAdventureSlide()">›</button>
+    </div>
+    <div class="content-area">
+      <div class="content-slide active">
+        <span class="subtitle">EXPERIENCE OUR ORCHARDS</span>
+        <h2>  Orchards Discovery</h2>
+        <p style="font-size: 1.2rem;" >Walk through our residue-free Orchards and flower gardens and discover how sustainable farming, careful soil management, and seasonal cultivation bring out the unique flavors and aromas of our fruits and blossoms. Every harvest contributes to the distinct character of Sam Wine, offering an experience unlike any traditional grape-based winery.</p>
+      </div>
+      <div class="content-slide">
+        <span class="subtitle">WINE KNOWLEDGE</span>
+        <h2>Educational Tastings</h2>
+        <p>Deepen your wine appreciation with guided tastings led by our sommelier. Learn to identify flavor profiles, understand wine pairing principles, and discover the art of proper wine tasting.</p>
+      </div>
+      <div class="content-slide">
+        <span class="subtitle">CELEBRATE WITH US</span>
+        <h2>Special Occasions</h2>
+        <p>Create unforgettable memories with private events in our Orchards. From intimate dinners to wedding celebrations, our scenic setting provides the perfect backdrop for life's special moments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW WINE REGION SECTION -->
+<section class="new-wine-region">
+  <div class="region-container">
+    <h2 class="region-title">The Sam Wine Craft</h2>
+    <div class="region-divider"></div>
+    <div class="region-destinations">
+      <div class="destination-item">
+        <span class="location">Innovation</span>
+        <span class="travel-time">Flower Wines</span>
+      </div>
+      <div class="destination-item">
+        <span class="location">Purity</span>
+        <span class="travel-time">Residue Free</span>
+      </div>
+      <div class="destination-item">
+        <span class="location">Wellness</span>
+        <span class="travel-time">Antioxidant Rich</span>
+      </div>
+      <div class="destination-item">
+        <span class="location">Nature</span>
+        <span class="travel-time">Natural Farming</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO SLIDER -->
+<section class="showcase-wrap">
+  <div class="showcase-container">
+    
+    <div class="showcase-panel" style="background-image: url('images/WINES3.png');">
+      <div class="panel-content">
+        <span class="panel-tag">THE TERROIR</span>
+        <h3>Ancient Roots</h3>
+        <p>Grown in the volcanic soils of the Sahyadri ranges, our vines breathe the spirit of the land.</p>
+        <a href="about.html" class="panel-link">Explore the Orchards</a>
+      </div>
+    </div>
+
+    <div class="showcase-panel" style="background-image: url('images/WINES.png');">
+      <div class="panel-content">
+        <span class="panel-tag">OUR METHOD</span>
+        <h3>Bespoke Craft</h3>
+        <p>Combining heritage fermentation techniques with modern precision to bottle liquid poetry.</p>
+        <a href="stories.html" class="panel-link">Our Story</a>
+      </div>
+    </div>
+
+    <div class="showcase-panel" style="background-image: url('images/RUBY\ RICH.png');">
+      <div class="panel-content">
+        <span class="panel-tag">THE CELLAR</span>
+        <h3>Rare Reserves</h3>
+        <p>A curated selection of our most exclusive vintages, aged to perfection for the true connoisseur.</p>
+        <a href="shop.html" class="panel-link">Shop Collection</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER IMPORT -->
+<div id="footer-container"></div>
+
+<script>
+// Import footer.html
+fetch('footer.html')
+  .then(response => response.text())
+  .then(data => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const footer = doc.querySelector('footer');
+    const styles = doc.querySelector('style');
+    
+    // Add the CSS styles to the head
+    if (styles) {
+      document.head.appendChild(styles);
+    }
+    
+    // Add the footer to the container
+    document.getElementById('footer-container').appendChild(footer);
+  })
+  .catch(error => console.error('Error loading footer:', error));
+</script>
+
+<script src="./visit.js"></script>
+<script>
+// Tasting tabs functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const tastingData = {
+    wine: {
+      heading: 'Wine Tasting',
+      description: 'Experience our signature wines in our elegant tasting room. Sample current releases, limited reserves, and seasonal selections guided by our knowledgeable wine specialists.',
+      price: '$25 per person',
+      image: 'images/jamun5.png'
+    },
+    legacy: {
+      heading: 'Legacy Tasting',
+      description: 'Private guided tasting experience with cheese and charcuterie pairings. Discover our heritage wines in an intimate setting.',
+      price: '$35 per person',
+      image: 'images/rectanglesize5.png'
+    },
+    Orchards: {
+      heading: 'Orchards Tour',
+      description: 'Explore our residue-free Orchards and flower gardens on a guided tour, followed by a private tasting of our signature wines. Learn firsthand about our winemaking process—from hand-selected fruits and blossoms to the final bottle—and gain a deeper appreciation for the craftsmanship behind every sip.',
+      price: '$45 per person',
+      image: 'images/sams wine6.png'
+    }
+  };
+
+  document.querySelectorAll('.tasting-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabType = tab.dataset.tab;
+      
+      // Update active tab
+      document.querySelectorAll('.tasting-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Update content
+      const data = tastingData[tabType];
+      document.querySelector('.tasting-heading').textContent = data.heading;
+      document.querySelector('.tasting-description').textContent = data.description;
+      document.querySelector('.tasting-price').textContent = data.price;
+      document.querySelector('.tasting-image img').src = data.image;
+    });
+  });
+});
+</script>
+</body>
+</html>

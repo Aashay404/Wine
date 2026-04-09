@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sam's Wine </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./age-verification.css">
+</head>
+<body>
+
+<!-- AGE VERIFICATION MODAL -->
+<!-- AGE VERIFICATION MODAL -->
+<!-- AGE VERIFICATION MODAL -->
+<!-- Replace your existing age modal div with this -->
+
+<div id="age-verification-modal" class="age-modal">
+  <div class="age-modal-background"></div>
+  <div class="age-modal-content">
+    <div class="age-card">
+
+      <div class="age-ornament">
+        <span class="age-ornament-line"></span>
+        <svg class="age-ornament-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2H16L18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8L8 2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M12 14V20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M8 20H16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M6 8H18" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-dasharray="1 2"/>
+        </svg>
+        <span class="age-ornament-line"></span>
+      </div>
+
+      <div class="age-modal-text">
+        <span class="age-eyebrow">Sam's Wine — Est. 2023</span>
+        <h2>Are you of legal<br>drinking age?</h2>
+        <div class="age-divider"></div>
+        <p class="age-subtext">
+          This website contains content about Wine.<br>
+          Please confirm you are of legal drinking age<br>to enter.
+        </p>
+        <div class="age-modal-buttons">
+          <button id="age-yes" class="age-btn age-btn-yes">Yes, Enter</button>
+          <button id="age-no"  class="age-btn age-btn-no">No, Exit</button>
+        </div>
+        <p class="age-legal">
+          By entering you accept our terms &amp; conditions.<br>
+          Do not share with minors.
+        </p>
+      </div>
+
+      <div class="age-brand-mark">
+        <span>Sam Agri Fresh</span>
+        <span class="age-brand-dot"></span>
+        <span>Crafted with Tradition</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- HEADER IMPORT -->
+<div id="header-container"></div>
+
+<script>
+// Import header.html
+fetch('header.html')
+  .then(response => response.text())
+  .then(data => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const nav = doc.querySelector('nav');
+    const menuOverlay = doc.querySelector('.menu-overlay');
+    const styles = doc.querySelector('style');
+    const scripts = doc.querySelector('script');
+    
+    // Add the CSS styles to the head
+    if (styles) {
+      document.head.appendChild(styles);
+      // Fix body overflow issue AFTER styles are added
+      setTimeout(() => {
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+        
+        // Fix family section visibility
+        const familySection = document.querySelector('.family');
+        if (familySection) {
+          familySection.style.opacity = '1';
+          familySection.style.transform = 'translateY(0)';
+        }
+      }, 100);
+    }
+    
+    // Remove background from navbar
+    if (nav) {
+      nav.style.background = 'transparent';
+      nav.style.backdropFilter = 'none';
+      
+      // Fix menu toggle visibility
+      const menuToggleSpans = nav.querySelectorAll('.menu-toggle span');
+      menuToggleSpans.forEach(span => {
+        span.style.background = 'white';
+        span.style.display = 'block';
+      });
+    }
+    
+    document.getElementById('header-container').appendChild(nav);
+    document.getElementById('header-container').appendChild(menuOverlay);
+    
+    // Execute the JavaScript from header.html
+    if (scripts) {
+      eval(scripts.textContent);
+    }
+  })
+  .catch(error => console.error('Error loading header:', error));
+</script>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="videos/frontvedio.MOV" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="hero-overlay">
+    <h1>Sam's Wine</h1>
+    <p>Crafted with Time & Tradition</p>
+  </div>
+</section>
+
+<!-- FAMILY SECTION -->
+<section class="family">
+  <div class="family-container">
+    <div class="family-image-card">
+      <div class="est-tag">Est. 2023</div>
+      <img src="images/RUBY RICH.png" class="main-image" alt="Winery Family Heritage">
+      <div class="overlay-wrapper">
+         <img src="images/pome8.png" class="overlay-image" alt="Orchards Heritage Detail">
+          <div style="background: #ffffff; padding: 40px; text-align: center;">
+  <img class="overlay-image" alt="Orchards Heritage Detail">
+</div>
+
+      </div>
+    </div>
+    
+    <div class="family-content-card">
+      <span class="section-subtitle">Three Generations</span>
+      <h2>We grew fruit for the world for 25 years. <br>Then we decided to pour it into a glass for you.
+</h2>
+      <p>
+       In 1996, my father started Sam Agri with one straightforward goal: grow better fruit than anyone else in India, and get it to the world in perfect condition. Pomegranates going to Swiss supermarkets. Figs landing in London. Coconut reaching kitchens in the UAE. For 25 years, that was the work.But there was always this quiet thought sitting in the back of everything.
+The best fruit we grew never left the farm. It stayed right here in Nashik. And one day we stopped asking why we were not doing more with it.
+
+
+
+      </p>
+      <div class="cta-wrapper">
+        <a href="wineclub.html" class="family-cta">Discover Our WINES</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM EXPLORE WINES -->
+<section class="premium-explore">
+  <div class="explore-container">
+    <div class="wine-slider-card">
+      <h2>Explore our wines</h2>
+      
+      <div class="wine-display">
+        <img src="images/jamun1.jpeg" alt="Wine Bottle" class="wine-bottle">
+        <div class="wine-info">
+          <h3 class="wine-name">Jamun Wine </h3>
+          <p class="wine-type">Reserve Collection</p>
+         
+        </div>
+      </div>
+      
+      <div class="slider-controls">
+        <button class="arrow-btn prev-btn">‹</button>
+        <div class="nav-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+
+        </div>
+        <button class="arrow-btn next-btn">›</button>
+      </div>
+      
+      <a href="wineclub.html" class="all-wines-cta">ALL WINES →</a>
+    </div>
+    
+    <div class="lifestyle-image">
+      <img src="images/rectanglesize7.png" alt="Orchards Lifestyle">
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="instagram">
+
+  <div class="instagram-header">
+
+    <!-- Instagram Logo -->
+    <svg class="instagram-icon1" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5c2.07 0 3.75 1.68 3.75 3.75v8.5c0 2.07-1.68 3.75-3.75 3.75h-8.5c-2.07 0-3.75-1.68-3.75-3.75v-8.5C4 5.68 5.68 4 7.75 4zm8.25 1.5a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+    </svg>
+
+    <h2>Instagram</h2>
+  </div>
+
+  <div class="instagram-gallery">
+
+    <!-- Reel -->
+    <div class="instagram-item" onclick="window.open('https://www.instagram.com/reel/DTxgCVzDY7L/', '_blank')">
+      <video autoplay muted loop playsinline>
+        <source src="videos/reels1.MOV" type="video/mp4">
+      </video>
+      <div class="play-btn">▶</div>
+    </div>
+
+    <div class="instagram-item" onclick="window.open('https://www.instagram.com/reel/DTxgCVzDY7L/', '_blank')">
+      <video autoplay muted loop playsinline>
+        <source src="videos/reels2.mp4" type="video/mp4">
+      </video>
+      <div class="play-btn">▶</div>
+    </div>
+
+    <div class="instagram-item" onclick="window.open('https://www.instagram.com/reel/DTxgCVzDY7L/', '_blank')">
+      <video autoplay muted loop playsinline>
+        <source src="videos/reels3.mp4" type="video/mp4">
+      </video>
+      <div class="play-btn">▶</div>
+    </div>
+
+    <div class="instagram-item" onclick="window.open('https://www.instagram.com/reel/DTxgCVzDY7L/', '_blank')">
+      <video autoplay muted loop playsinline>
+        <source src="videos/reels4.mp4" type="video/mp4">
+      </video>
+      <div class="play-btn">▶</div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PLAN VISIT -->
+<section class="visit">
+  <div class="visit-container">
+    <div class="visit-menu-panel">
+      <h2>Plan Your Visit</h2>
+      <ul class="visit-menu">
+        <li class="visit-menu-item active" data-visit="private">
+          <span>Private tasting</span>
+        </li>
+        <li class="visit-menu-item" data-visit="room">
+          <span>Tasting room</span>
+        </li>
+        <li class="visit-menu-item" data-visit="food">
+          <span>Food menu</span>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="visit-content">
+      <img src="images/rectanglesize4.png" alt="Orchards landscape" class="visit-image">
+      <div class="visit-text-content">
+        <p class="visit-description">
+          Experience the essence of our terroir through intimate tastings 
+          where each glass tells the story of our Orchards's heritage.
+        </p>
+        <a href="about.html" class="visit-cta">EXPLORE MORE →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="stories">
+  <div class="stories-container">
+    <div class="stories-header">
+      <span class="subtitle">Journal</span>
+      <h2 class="stories-heading">Orchards Stories</h2>
+    </div>
+    
+    <div class="stories-grid">
+      <div class="story-card story-left">
+        <div class="story-image-wrapper">
+          <img src="images/WINES3.png" alt="Wine tasting experience" class="story-image">
+          <div class="story-date">Oct 2025</div>
+        </div>
+        <div class="story-content">
+          <h3 class="story-title">Elevate Your Wine Tasting Experience</h3>
+          <h4 class="story-excerpt">Most wine brands start with a vineyard dream and a borrowed winery. We started with certified farms, two and a half decades of food safety expertise, and a deep obsession with fruit that most winemakers have never even thought to ferment.
+
+</h4>
+          <a href="stories.html" class="read-more">Read Story —</a>
+        </div>
+      </div>
+      
+      <div class="story-card story-right">
+        <div class="story-image-wrapper">
+          <img src="images/2.jpeg" alt="Orchards landscape" class="story-image">
+          <div class="story-date">Sept 2025</div>
+        </div>
+        <div class="story-content">
+          <h3 class="story-title">Sam Wine Orchards: Roots That Run Deep</h3>
+          <h4 class="story-excerpt">Pomegranate grown on our own residue free farms. Jamun from Maharashtra orchards we know by name. Mahua flowers from tribal forests, handled with the kind of care the flower has always deserved. Every bottle connects to real land and a real relationship we have with what grows on it.</bold>
+          <a href="stories.html" class="read-more"><br> <br> Read Story —</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="wine-profile">
+  <div class="profile-container">
+    <div class="profile-text">
+      <span class="subtitle">The Art of the Blend</span>
+      <h2>Sensory Profile</h2>
+<p>Every Sam Wine is crafted to deliver a clear, elegant sensory experience, shaped by fruit selection, fermentation control, and maturation.</p>      
+      <div class="characteristic-bars">
+        <div class="bar-item">
+          <div class="bar-label"><span>Body</span><span>Full</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Tannins</span><span>Silky</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 65%;"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Acidity</span><span>Balanced</span></div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-features">
+      <div class="feature-box">
+        <div class="feature-icon"></div>
+        <h3>Hand-Picked</h3>
+        <p>Carefully sourced from residue-free Orchards and partner farms, harvested at peak ripeness to preserve natural aroma, flavour, and balance.</p>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon"></div>
+        <h3>Thoughtfully Aged</h3>
+        <p>Select wines are matured in French oak to add subtle warmth, structure, and gentle smoky notes—enhancing complexity without overpowering the fruit or flower character.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER IMPORT -->
+<div id="footer-container"></div>
+
+<script>
+// Import footer.html
+fetch('footer.html')
+  .then(response => response.text())
+  .then(data => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const footer = doc.querySelector('footer');
+    const styles = doc.querySelector('style');
+    
+    // Add the CSS styles to the head
+    if (styles) {
+      document.head.appendChild(styles);
+    }
+    
+    // Add the footer to the container
+    document.getElementById('footer-container').appendChild(footer);
+  })
+  .catch(error => console.error('Error loading footer:', error));
+</script>
+
+<script src="./age-verification.js"></script>
+<script src="./index.js"></script>
+</body>
+</html>

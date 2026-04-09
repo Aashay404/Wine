@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Locations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- HEADER IMPORT -->
+    <div id="header-container"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const nav = doc.querySelector('nav');
+                const menuOverlay = doc.querySelector('.menu-overlay');
+                const styles = doc.querySelector('style');
+                const scripts = doc.querySelector('script');
+                if (styles) {
+                    document.head.appendChild(styles);
+                    setTimeout(() => {
+                        document.body.style.overflow = 'auto';
+                        document.documentElement.style.overflow = 'auto';
+                    }, 100);
+                }
+                if (nav) {
+                    nav.style.background = 'transparent';
+                    nav.style.backdropFilter = 'none';
+                    const menuToggleSpans = nav.querySelectorAll('.menu-toggle span');
+                    menuToggleSpans.forEach(span => {
+                        span.style.background = 'white';
+                        span.style.display = 'block';
+                    });
+                }
+                document.getElementById('header-container').appendChild(nav);
+                document.getElementById('header-container').appendChild(menuOverlay);
+                if (scripts) { eval(scripts.textContent); }
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Outfit", sans-serif;
+            background-color: #ffffff;
+            color: #1a2332;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 50px 20px 40px;
+            background-color: black;
+        }
+
+        .page-title h1 {
+            font-size: 3.5em;
+            font-weight: 400;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            display: flex;
+            max-width: 100%;
+            height: 600px;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            width: 40%;
+            background-color: black;
+            padding: 40px 50px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            font-size: 1.8em;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .search-box {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 1px solid #d1d5db;
+            font-size: 0.95em;
+            font-family: "Outfit", sans-serif;
+            color: #6b7280;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .search-box input::placeholder { color: #9ca3af; }
+
+        .search-box button {
+            padding: 16px 24px;
+            background-color: #ef5350;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .search-box button:hover { background-color: #e53935; }
+
+        /* Search result message */
+        .search-status {
+            font-size: 0.85em;
+            color: #c6a75e;
+            margin-bottom: 12px;
+            min-height: 20px;
+            font-family: "Outfit", sans-serif;
+        }
+
+        .no-results {
+            color: #ef5350;
+            font-size: 0.9em;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .location-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .location-item:hover { padding-left: 10px; }
+
+        .location-item.active {
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        .location-icon {
+            width: 44px;
+            height: 44px;
+            background-color: #1a3a52;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px;
+            flex-shrink: 0;
+        }
+
+        .location-icon svg { width: 22px; height: 22px; fill: white; }
+
+        .location-details h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: white;
+            font-family: "Outfit", sans-serif;
+        }
+
+        .location-details p {
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: antiquewhite;
+            font-family: "Outfit", sans-serif;
+        }
+
+        .map-container {
+            width: 60%;
+            position: relative;
+            background-color: #e8f4f8;
+        }
+
+        #map { width: 100%; height: 100%; }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: black;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            color: white;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: #ef5350;
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+            font-family: "Outfit", sans-serif;
+        }
+
+        .cta-button:hover { background-color: #e53935; }
+
+        /* Custom marker styling */
+        .custom-marker {
+            background-color: #1a3a52;
+            border: 3px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            font-family: "Outfit", sans-serif;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .custom-marker.active {
+            background-color: #ef5350;
+            width: 44px;
+            height: 44px;
+            font-size: 15px;
+        }
+
+        .custom-marker.hidden-marker {
+            background-color: #555;
+            opacity: 0.4;
+        }
+
+        /* Scrollbar styling */
+        .sidebar::-webkit-scrollbar { width: 8px; }
+        .sidebar::-webkit-scrollbar-track { background: #1a1a1a; }
+        .sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        .sidebar::-webkit-scrollbar-thumb:hover { background: #666; }
+
+        @media (max-width: 968px) {
+            .page-title h1 { font-size: 2.5em; }
+            .container { flex-direction: column; height: auto; }
+            .sidebar { width: 100%; padding: 30px 20px; }
+            .map-container { width: 100%; height: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-title">
+        <h1>Our Locations</h1>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Sam's Wine Locations</h2>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by city or store name">
+                <button onclick="searchLocation()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="search-status" id="searchStatus"></div>
+
+            <div class="location-list" id="locationList"></div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <p>Want to Carry Maker? Or know a place Maker should be?</p>
+        <a href="#" class="cta-button">Let Us Know</a>
+    </div>
+
+    <script>
+        const locations = [
+            { name: "Wine World Pune", address: "MG Road", city: "Pune, Maharashtra 411001", lat: 18.5204, lng: 73.8567 },
+            { name: "Mumbai Wine Shop", address: "Linking Road, Bandra", city: "Mumbai, Maharashtra 400050", lat: 19.0596, lng: 72.8295 },
+            { name: "Grape Expectations Nagpur", address: "Sitabuldi", city: "Nagpur, Maharashtra 440012", lat: 21.1458, lng: 79.0882 },
+            { name: "Aurangabad Wine Cellar", address: "Station Road", city: "Aurangabad, Maharashtra 431001", lat: 19.8762, lng: 75.3433 },
+            { name: "Nashik Valley Wines", address: "Old Gangapur Naka", city: "Nashik, Maharashtra 422005", lat: 19.9975, lng: 73.7898 },
+            { name: "Kolhapur Wine House", address: "Tarabai Park", city: "Kolhapur, Maharashtra 416003", lat: 16.7050, lng: 74.2433 },
+            { name: "Thane Wine Gallery", address: "Vartak Nagar", city: "Thane, Maharashtra 400606", lat: 19.2183, lng: 72.9781 },
+            { name: "Solapur Wine Merchants", address: "Sadar Bazaar", city: "Solapur, Maharashtra 413003", lat: 17.6599, lng: 75.9064 }
+        ];
+
+        let map;
+        let markers = [];
+        let selectedLocationIndex = null;
+        let filteredIndices = locations.map((_, i) => i); // all shown by default
+
+        function initMap() {
+            map = L.map('map').setView([19.7515, 75.7139], 7);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            locations.forEach((location, index) => {
+                const customIcon = L.divIcon({
+                    className: 'custom-div-icon',
+                    html: `<div class="custom-marker" id="marker-${index}">${index + 1}</div>`,
+                    iconSize: [40, 40],
+                    iconAnchor: [20, 20]
+                });
+
+                const marker = L.marker([location.lat, location.lng], { icon: customIcon }).addTo(map);
+
+                marker.bindPopup(`
+                    <div style="padding:12px;font-family:'Outfit',sans-serif;">
+                        <h3 style="margin:0 0 8px 0;color:#1a2332;font-size:16px;font-weight:600;">${location.name}</h3>
+                        <p style="margin:0;color:#4b5563;font-size:14px;line-height:1.5;">${location.address}<br>${location.city}</p>
+                    </div>
+                `);
+
+                marker.on('click', () => {
+                    selectLocation(index);
+                    map.setView([location.lat, location.lng], 12);
+                });
+
+                markers.push(marker);
+            });
+
+            renderLocationList();
+        }
+
+        function renderLocationList(indicesToShow) {
+            const locationList = document.getElementById('locationList');
+            locationList.innerHTML = '';
+
+            const indices = indicesToShow !== undefined ? indicesToShow : locations.map((_, i) => i);
+
+            if (indices.length === 0) {
+                locationList.innerHTML = '<div class="no-results">No locations found. Try a different search.</div>';
+                return;
+            }
+
+            indices.forEach((index) => {
+                const location = locations[index];
+                const locationItem = document.createElement('div');
+                locationItem.className = 'location-item' + (index === selectedLocationIndex ? ' active' : '');
+
+                locationItem.innerHTML = `
+                    <div class="location-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <div class="location-details">
+                        <h3>${location.name}</h3>
+                        <p>${location.address}<br>${location.city}</p>
+                    </div>
+                `;
+
+                locationItem.addEventListener('click', () => {
+                    selectLocation(index);
+                    map.setView([location.lat, location.lng], 13);
+                    markers[index].openPopup();
+                });
+
+                locationList.appendChild(locationItem);
+            });
+        }
+
+        function selectLocation(index) {
+            selectedLocationIndex = index;
+            renderLocationList(filteredIndices);
+
+            markers.forEach((marker, i) => {
+                const el = document.getElementById(`marker-${i}`);
+                if (el) {
+                    el.classList.toggle('active', i === index);
+                }
+            });
+        }
+
+        function updateMarkersVisibility(matchedIndices) {
+            markers.forEach((marker, i) => {
+                const el = document.getElementById(`marker-${i}`);
+                if (el) {
+                    if (matchedIndices.includes(i)) {
+                        el.classList.remove('hidden-marker');
+                    } else {
+                        el.classList.add('hidden-marker');
+                        el.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        function searchLocation() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const statusEl = document.getElementById('searchStatus');
+
+            if (!query) {
+                // Reset: show all
+                filteredIndices = locations.map((_, i) => i);
+                renderLocationList(filteredIndices);
+                updateMarkersVisibility(filteredIndices);
+                statusEl.textContent = '';
+                map.setView([19.7515, 75.7139], 7);
+                return;
+            }
+
+            // 1. Filter store locations by name or city
+            const matched = locations
+                .map((loc, i) => ({ loc, i }))
+                .filter(({ loc }) =>
+                    loc.name.toLowerCase().includes(query) ||
+                    loc.city.toLowerCase().includes(query) ||
+                    loc.address.toLowerCase().includes(query)
+                )
+                .map(({ i }) => i);
+
+            filteredIndices = matched;
+            renderLocationList(matched);
+            updateMarkersVisibility(matched);
+
+            if (matched.length > 0) {
+                statusEl.textContent = `${matched.length} location${matched.length > 1 ? 's' : ''} found`;
+
+                // If only one match, zoom into it
+                if (matched.length === 1) {
+                    const loc = locations[matched[0]];
+                    map.setView([loc.lat, loc.lng], 13);
+                    markers[matched[0]].openPopup();
+                } else {
+                    // Fit map to show all matched markers
+                    const bounds = matched.map(i => [locations[i].lat, locations[i].lng]);
+                    map.fitBounds(bounds, { padding: [40, 40] });
+                }
+            } else {
+                // No store match — geocode the search term to pan map
+                statusEl.textContent = 'No stores found. Searching map area...';
+
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=in`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            const lat = parseFloat(data[0].lat);
+                            const lon = parseFloat(data[0].lon);
+                            map.setView([lat, lon], 11);
+                            statusEl.textContent = `No Sam's Wine stores in "${query}" yet.`;
+                        } else {
+                            statusEl.textContent = 'Location not found. Try a different search.';
+                        }
+                    })
+                    .catch(() => {
+                        statusEl.textContent = 'Could not search. Check your connection.';
+                    });
+            }
+        }
+
+        // Enter key support
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') searchLocation();
+        });
+
+        // Live filter as user types (store names/cities only)
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const query = this.value.trim().toLowerCase();
+            const statusEl = document.getElementById('searchStatus');
+
+            if (!query) {
+                filteredIndices = locations.map((_, i) => i);
+                renderLocationList(filteredIndices);
+                updateMarkersVisibility(filteredIndices);
+                statusEl.textContent = '';
+                map.setView([19.7515, 75.7139], 7);
+                return;
+            }
+
+            const matched = locations
+                .map((loc, i) => ({ loc, i }))
+                .filter(({ loc }) =>
+                    loc.name.toLowerCase().includes(query) ||
+                    loc.city.toLowerCase().includes(query) ||
+                    loc.address.toLowerCase().includes(query)
+                )
+                .map(({ i }) => i);
+
+            filteredIndices = matched;
+            renderLocationList(matched);
+            updateMarkersVisibility(matched);
+
+            if (matched.length > 0) {
+                statusEl.textContent = `${matched.length} location${matched.length > 1 ? 's' : ''} found`;
+                if (matched.length === 1) {
+                    const loc = locations[matched[0]];
+                    map.setView([loc.lat, loc.lng], 13);
+                } else {
+                    const bounds = matched.map(i => [locations[i].lat, locations[i].lng]);
+                    map.fitBounds(bounds, { padding: [40, 40] });
+                }
+            } else {
+                statusEl.textContent = 'No matching stores — press Search to look on map';
+            }
+        });
+
+        window.addEventListener('load', initMap);
+    </script>
+
+    <!-- FOOTER IMPORT -->
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const footer = doc.querySelector('footer');
+                const styles = doc.querySelector('style');
+                if (styles) { document.head.appendChild(styles); }
+                document.getElementById('footer-container').appendChild(footer);
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+</body>
+</html>
