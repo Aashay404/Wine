@@ -219,10 +219,10 @@
 
         <article class="product-card">
             <div class="product-image">
-                <img src="images/CRIMSON.png" alt="Crimson Heritage">
+                <img src="images/CRIMSON.png" alt="Crimson Silk">
             </div>
             <div class="product-category">Heritage Red</div>
-            <h3 class="product-title">Crimson Heritage</h3>
+            <h3 class="product-title">Crimson Silk</h3>
             
         </article>
     </section>
@@ -230,8 +230,52 @@
     <div id="footer-container"></div>
 
     <script>
-        // Use your existing fetch scripts here for header and footer
-        // Copy-paste the script from your wineclub.html
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, "text/html");
+          const nav = doc.querySelector("nav");
+          const menuOverlay = doc.querySelector(".menu-overlay");
+          const styles = doc.querySelector("style");
+          const scripts = doc.querySelector("script");
+
+          if (styles) {
+            document.head.appendChild(styles);
+            setTimeout(() => {
+              document.body.style.overflow = "auto";
+              document.documentElement.style.overflow = "auto";
+            }, 100);
+          }
+
+          if (nav) {
+            nav.style.background = "transparent";
+            nav.style.backdropFilter = "none";
+            const menuToggleSpans = nav.querySelectorAll(".menu-toggle span");
+            menuToggleSpans.forEach((span) => {
+              span.style.background = "white";
+              span.style.display = "block";
+            });
+          }
+
+          document.getElementById("header-container").appendChild(nav);
+          document.getElementById("header-container").appendChild(menuOverlay);
+
+          if (scripts) { eval(scripts.textContent); }
+        })
+        .catch((error) => console.error("Error loading header:", error));
+
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, "text/html");
+          const footer = doc.querySelector("footer");
+          const styles = doc.querySelector("style");
+          if (styles) { document.head.appendChild(styles); }
+          document.getElementById("footer-container").appendChild(footer);
+        })
+        .catch((error) => console.error("Error loading footer:", error));
     </script>
 </body>
 </html>

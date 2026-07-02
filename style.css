@@ -902,16 +902,17 @@ section {
   color: #fff;
 }
 
-.profile-container {
+.stats-container {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
 }
 
-.profile-text .subtitle {
+.stats-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.stats-header .subtitle {
   color: #d4af37;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -920,103 +921,84 @@ section {
   display: block;
 }
 
-.profile-text h2 {
+.stats-header h2 {
   font-size: clamp(2rem, 3vw, 3.5rem);
   margin-bottom: 20px;
   color: #fff;
   font-weight: 400;
 }
 
-.profile-text p {
+.stats-intro {
   color: #ccc;
-  margin-bottom: 40px;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
-.bar-item {
-  margin-bottom: 28px;
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
 }
 
-.bar-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #fff;
-}
-
-.bar-bg {
-  height: 2px;
-  background: rgba(255,255,255,0.1);
-  width: 100%;
+.stat-card {
+  background: #111;
+  padding: 40px 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   position: relative;
 }
 
-.bar-fill {
-  height: 100%;
-  background: #d4af37;
-  box-shadow: 0 0 12px rgba(212,175,55,0.4);
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.profile-features {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.feature-box {
-  background: #111;
-  padding: 36px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.4s ease;
-}
-
-.feature-box:hover {
+.stat-card:hover {
   border-color: #d4af37;
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.05);
 }
 
-.feature-icon {
-  font-size: 22px;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.feature-box h3 {
+.stat-number {
+  font-size: clamp(3rem, 4vw, 4.5rem);
   color: #d4af37;
-  margin-bottom: 12px;
-  font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 15px;
+  font-family: "Outfit", sans-serif;
 }
 
-.feature-box p {
-  color: #ccc;
-  font-size: 0.95rem;
+.stat-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.stat-desc {
+  color: #888;
+  font-size: 0.9rem;
   line-height: 1.6;
   font-weight: 300;
 }
 
-@media (max-width: 900px) {
-  .profile-container {
-    grid-template-columns: 1fr;
-    gap: 50px;
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-card {
+    padding: 30px 20px;
+  }
   .wine-profile {
     padding: 70px 5%;
-  }
-  .feature-box {
-    padding: 28px 24px;
   }
 }
 

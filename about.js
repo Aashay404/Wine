@@ -5,27 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
   const foundersData = [
     {
       image: 'images/img.jpeg',
-      name: 'Karl Watson',
-      role: 'Owner',
-      bio: 'A third-generation vintner with over 30 years of experience, Karl combines traditional winemaking techniques with modern sustainable practices. His vision has transformed our family Orchards into one of the region\'s most respected wineries.',
-      bottomName: 'Robert Chen',
-      bottomRole: 'Orchards Director',
-      bottomBio: 'A pioneer in sustainable farming practices, Robert oversees our 150-acre Orchards with meticulous attention to detail. His commitment to organic methods ensures the purest expression of our terroir.'
+      name: 'Sam Agri Group',
+      role: 'Parent Company',
+      bio: 'A prominent integrated agricultural group since 1996, pioneering exports of premium Indian fresh produce to global markets and establishing trust over 25 years.',
+      bottomName: 'Mr. K. N. Rao',
+      bottomRole: 'Technical Director',
+      bottomBio: 'K.N. Rao is the visionary who inspired Sam\'s journey into winemaking by recognizing the potential of transforming premium pomegranate harvests into world-class value-added products. With over 25 years of expertise in agriculture, food processing, research, and product innovation, he laid the technical and strategic foundation for Sam\'s Wine. His passion for quality, innovation, and sustainable value creation continues to shape our commitment to crafting distinctive fruit wines from the finest produce.'
     },
     {
       image: 'images/strawberry vertical (2).png',
-      name: 'Elena Martinez',
-      role: 'Head Winemaker',
-      bio: 'With a master\'s degree in viticulture and 20 years of international experience, Elena brings innovation and precision to every vintage. Her expertise in terroir expression has earned numerous awards for our wines.',
+      name: 'Viraj Deore',
+      role: 'Head of Wine Business',
+      bio: 'Viraj Deore heads the Wine Business at Sam\'s Wine, leading the brand from concept to market. He has been instrumental in establishing the winery, developing award-worthy fruit wines, implementing world-class production systems, securing regulatory approvals, and expanding the brand\'s presence through tourism, retail, and strategic partnerships. With international winemaking experience and a passion for innovation, he is committed to redefining India\'s fruit wine industry through quality, authenticity, and sustainable growth.',
       bottomName: 'Sarah Johnson',
       bottomRole: 'Cellar Master',
       bottomBio: 'With 15 years of experience in wine production, Sarah oversees every aspect of our fermentation and aging processes. Her meticulous attention to detail ensures each vintage meets our exacting standards.'
     },
     {
       image: 'images/pome3.png',
-      name: 'Robert Chen',
-      role: 'Orchards Director',
-      bio: 'A pioneer in sustainable farming practices, Robert oversees our 150-acre Orchards with meticulous attention to detail. His commitment to organic methods ensures the purest expression of our terroir.',
+      name: 'Elena Martinez',
+      role: 'Head Winemaker',
+      bio: 'With a master\'s degree in viticulture and 20 years of international experience, Elena brings innovation and precision to every vintage. Her expertise in terroir expression has earned numerous awards for our wines.',
       bottomName: 'Michael Torres',
       bottomRole: 'Operations Manager',
       bottomBio: 'Leading our day-to-day operations with precision and care, Michael ensures that every aspect of our winery runs smoothly. His dedication to excellence is reflected in every bottle we produce.'

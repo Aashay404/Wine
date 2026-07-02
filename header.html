@@ -53,8 +53,7 @@
         color: white;
         text-transform: uppercase;
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 60px;
         /* FIX ALIGNMENT */
         display: flex;
         align-items: center;
@@ -174,6 +173,7 @@
     .menu-overlay.active .nav-menu li:nth-child(3) a { animation-delay: 0.3s; }
     .menu-overlay.active .nav-menu li:nth-child(4) a { animation-delay: 0.4s; }
     .menu-overlay.active .nav-menu li:nth-child(5) a { animation-delay: 0.5s; }
+    .menu-overlay.active .nav-menu li:nth-child(6) a { animation-delay: 0.6s; }
 
     @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
     
@@ -232,7 +232,7 @@
         .navbar { justify-content: space-between; padding: 20px;
         margin-top: -26px; }
         .logo { position: static; transform: none;
-        margin-left: 143px; }
+        margin-left: 0; }
     }
 </style>
 </head>
@@ -327,7 +327,7 @@ Taluka Dindori, Nashik – 422202
             <ul class="nav-menu">
                 <li>
                     <span class="menu-label">HOME</span>
-                    <a href="index.html" data-img="images/header.png" alt="Samwine Winery">Samwine Winery</a>
+                    <a href="index.html" data-img="images/header.png" alt="Sam's Winery">Sam's Winery</a>
                 </li>
                 <li>
                     <span class="menu-label">ABOUT US</span>
@@ -339,11 +339,15 @@ Taluka Dindori, Nashik – 422202
                 </li>
                 <li>
                     <span class="menu-label">PLAN YOUR</span>
-                    <a href="visit.html" data-img="images/visit.png" alt="Visit">Visit</a>
+                    <a href="visit.html" data-img="images/visit.png" alt="Visit Us">Visit Us</a>
                 </li>
                 <li>
                     <span class="menu-label">BEHIND THE SCIENCE</span>
                     <a href="stories.html" data-img="images/rectanglesize4.png" alt="Stories">Stories</a>
+                </li>
+                <li>
+                    <span class="menu-label">ONLINE STORE</span>
+                    <a href="shop.html" data-img="images/RUBY RICH.png" alt="Shop Now">Shop Now</a>
                 </li>
             </ul>
         </div>

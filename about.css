@@ -229,6 +229,50 @@ body {
   color: #ffffff;
 }
 
+.sam-agri-link {
+  display: inline-block;
+  color: #d4af37;
+  text-decoration: none;
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #d4af37;
+  padding-bottom: 2px;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+
+.sam-agri-link:hover {
+  opacity: 0.8;
+  border-bottom-color: transparent;
+}
+
+.founder-socials {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.founder-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.founder-socials a:hover {
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #000;
+  transform: translateY(-3px);
+}
+
 .founder-bio {
   font-size: 15px;
   line-height: 1.6;
