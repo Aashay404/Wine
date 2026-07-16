@@ -1,9 +1,9 @@
 // ===== WINE SLIDER DATA =====
 const wineData = [
-  { image: 'images/jamun1.jpeg',      name: 'Jamun Wine',        type: 'Reserve Collection' },
-  { image: 'images/strawberry1.png',  name: 'Strawberry Wine',   type: 'Premium Selection' },
-  { image: 'images/pome1.png',        name: 'Pomegranate Wine',  type: 'Signature Blend' },
-  { image: 'images/mahua2.png',       name: 'Mahua Wine',        type: 'Limited Edition' },
+  { image: 'images/jamun1.jpeg',      name: 'Jamun Wine',        type: 'Reserve Collection', orchardImage: 'images/jamun5.png' },
+  { image: 'images/strawberry1.png',  name: 'Strawberry Wine',   type: 'Premium Selection',  orchardImage: 'images/strawberry3.png' },
+  { image: 'images/pome1.png',        name: 'Pomegranate Wine',  type: 'Signature Blend',    orchardImage: 'images/pome (2).png' },
+  { image: 'images/mahua2.png',       name: 'Mahua Wine',        type: 'Limited Edition',    orchardImage: 'images/mahua2.png' },
 ];
 
 let currentWineIndex = 0;
@@ -13,23 +13,38 @@ function updateWineDisplay(animate) {
   const bottle = document.querySelector('.wine-bottle');
   const name   = document.querySelector('.wine-name');
   const type   = document.querySelector('.wine-type');
+  const lifestyleImg = document.querySelector('.lifestyle-image img');
 
   if (!bottle || !name) return;
 
   if (animate) {
     bottle.style.opacity = '0';
     bottle.style.transform = 'translateY(12px)';
+    if (lifestyleImg) {
+      lifestyleImg.style.opacity = '0';
+      lifestyleImg.style.transform = 'scale(0.98)';
+    }
     setTimeout(() => {
       bottle.src = wine.image;
       name.textContent = wine.name;
       if (type) type.textContent = wine.type;
+      if (lifestyleImg && wine.orchardImage) {
+        lifestyleImg.src = wine.orchardImage;
+      }
       bottle.style.opacity = '1';
       bottle.style.transform = 'translateY(0)';
+      if (lifestyleImg) {
+        lifestyleImg.style.opacity = '1';
+        lifestyleImg.style.transform = 'scale(1)';
+      }
     }, 280);
   } else {
     bottle.src = wine.image;
     name.textContent = wine.name;
     if (type) type.textContent = wine.type;
+    if (lifestyleImg && wine.orchardImage) {
+      lifestyleImg.src = wine.orchardImage;
+    }
   }
 
   // Update dots

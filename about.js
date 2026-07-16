@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
       bio: 'A prominent integrated agricultural group since 1996, pioneering exports of premium Indian fresh produce to global markets and establishing trust over 25 years.',
       bottomName: 'Mr. K. N. Rao',
       bottomRole: 'Technical Director',
-      bottomBio: 'K.N. Rao is the visionary who inspired Sam\'s journey into winemaking by recognizing the potential of transforming premium pomegranate harvests into world-class value-added products. With over 25 years of expertise in agriculture, food processing, research, and product innovation, he laid the technical and strategic foundation for Sam\'s Wine. His passion for quality, innovation, and sustainable value creation continues to shape our commitment to crafting distinctive fruit wines from the finest produce.'
+      bottomBio: 'K.N. Rao is the visionary who inspired Sam\'s journey into winemaking by recognizing the potential of transforming premium pomegranate harvests into world-class value-added products. With over 35 years of expertise in agriculture, food processing, research, and product innovation, he laid the technical and strategic foundation for Sam\'s Wine. His passion for quality, innovation, and sustainable value creation continues to shape our commitment to crafting distinctive fruit wines from the finest produce.'
     },
     {
       image: 'images/strawberry vertical (2).png',
