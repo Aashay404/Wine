@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipes & Mixology — Sam's Wine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./recipes.css">
+  <link rel="stylesheet" href="./age-verification.css">
+</head>
+<body>
+
+<!-- AGE VERIFICATION MODAL -->
+<div id="age-verification-modal" class="age-modal">
+  <div class="age-modal-background"></div>
+  <div class="age-modal-content">
+    <div class="age-card">
+      <div class="age-ornament">
+        <span class="age-ornament-line"></span>
+        <svg class="age-ornament-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2H16L18 8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8L8 2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M12 14V20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M8 20H16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M6 8H18" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-dasharray="1 2"/>
+        </svg>
+        <span class="age-ornament-line"></span>
+      </div>
+
+      <div class="age-modal-text">
+        <span class="age-eyebrow">Sam's Wine — Est. 2022</span>
+        <h2>Are you of legal<br>drinking age?</h2>
+        <div class="age-divider"></div>
+        <p class="age-subtext">
+          This website contains content about Wine.<br>
+          Please confirm you are of legal drinking age<br>to enter.
+        </p>
+        <div class="age-modal-buttons">
+          <button id="age-yes" class="age-btn age-btn-yes">Yes, Enter</button>
+          <button id="age-no"  class="age-btn age-btn-no">No, Exit</button>
+        </div>
+        <p class="age-legal">
+          By entering you accept our terms &amp; conditions.<br>
+          Do not share with minors.
+        </p>
+      </div>
+
+      <div class="age-brand-mark">
+        <span>Sam Agri Fresh</span>
+        <span class="age-brand-dot"></span>
+        <span>Crafted with Tradition</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER IMPORT -->
+<div id="header-container"></div>
+
+<script>
+// Import header.html
+fetch('header.html')
+  .then(response => response.text())
+  .then(data => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const nav = doc.querySelector('nav');
+    const menuOverlay = doc.querySelector('.menu-overlay');
+    const styles = doc.querySelector('style');
+    const scripts = doc.querySelector('script');
+    
+    if (styles) {
+      document.head.appendChild(styles);
+      setTimeout(() => {
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+      }, 100);
+    }
+    
+    if (nav) {
+      nav.style.background = 'transparent';
+      nav.style.backdropFilter = 'none';
+      
+      const menuToggleSpans = nav.querySelectorAll('.menu-toggle span');
+      menuToggleSpans.forEach(span => {
+        span.style.background = 'white';
+        span.style.display = 'block';
+      });
+    }
+    
+    document.getElementById('header-container').appendChild(nav);
+    document.getElementById('header-container').appendChild(menuOverlay);
+    
+    if (scripts) {
+      eval(scripts.textContent);
+    }
+  })
+  .catch(error => console.error('Error loading header:', error));
+</script>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Mixology & Pairings</h1>
+  <p>Elevate your senses. Discover premium hand-crafted cocktail recipes and gourmet culinary pairings designed specifically to complement the unique profiles of Sam's Wine collection.</p>
+</section>
+
+<!-- RECIPES SECTION -->
+<section class="recipes-section">
+  
+  <div class="tabs-container">
+    <div class="tabs">
+      <button class="tab active" onclick="openTab('all', this)">All Recipes</button>
+      <button class="tab" onclick="openTab('pome', this)">Pomegranate Wine</button>
+      <button class="tab" onclick="openTab('jamun', this)">Jamun Wine</button>
+      <button class="tab" onclick="openTab('mahua', this)">Mahua Wine</button>
+      <button class="tab" onclick="openTab('strawberry', this)">Strawberry Wine</button>
+    </div>
+  </div>
+
+  <div class="recipes-grid">
+
+    <!-- RECIPE 1: POMEGRANATE SANGRIA -->
+    <article class="recipe-card" data-category="pome">
+      <div class="recipe-img-wrapper">
+        <span class="pairing-tag tag-pome">Pomegranate Wine</span>
+        <img src="images/pome (5).png" alt="Crimson Spiced Sangria" class="recipe-img">
+        <div class="recipe-details-badges">
+          <span class="badge">Prep: 10 mins</span>
+          <span class="badge">Easy</span>
+        </div>
+      </div>
+      <div class="recipe-content">
+        <h3 class="recipe-title">The Crimson Spiced Sangria</h3>
+        <p class="recipe-desc">A rich, festive interpretation of the Spanish classic. The deep red-fruit notes of our Pomegranate Wine blend seamlessly with fresh autumn citrus and a warm touch of cinnamon spice.</p>
+        
+        <div class="recipe-expandable">
+          <button class="toggle-btn" onclick="toggleRecipe(this)">
+            <span>View Full Recipe</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </button>
+          <div class="expanded-content">
+            <h4 class="section-subtitle">Ingredients</h4>
+            <ul class="ingredients-list">
+              <li>1 Bottle (750ml) Sam's Pomegranate Wine</li>
+              <li>60ml Brandy or Dark Rum</li>
+              <li>1 Fresh Orange (sliced into wheels)</li>
+              <li>1 Red Apple (cored and chopped)</li>
+              <li>2 Cinnamon sticks</li>
+              <li>150ml Club soda (to top)</li>
+            </ul>
+            <h4 class="section-subtitle">Instructions</h4>
+            <ol class="steps-list">
+              <li>Place the sliced oranges, chopped apples, and cinnamon sticks at the bottom of a large glass pitcher.</li>
+              <li>Pour in the brandy and Sam's Pomegranate Wine, then stir gently.</li>
+              <li>Refrigerate for at least 4 hours (ideally overnight) to allow the fruit flavors to infuse.</li>
+              <li>Before serving, stir in the chilled club soda. Serve in red wine glasses filled with ice.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- RECIPE 2: JAMUN COOLER -->
+    <article class="recipe-card" data-category="jamun">
+      <div class="recipe-img-wrapper">
+        <span class="pairing-tag tag-jamun">Jamun Wine</span>
+        <img src="images/jamun square (2).png" alt="Jamun Twilight Cooler" class="recipe-img">
+        <div class="recipe-details-badges">
+          <span class="badge">Prep: 5 mins</span>
+          <span class="badge">Easy</span>
+        </div>
+      </div>
+      <div class="recipe-content">
+        <h3 class="recipe-title">Jamun Twilight Cooler</h3>
+        <p class="recipe-desc">A refreshing twilight cooler that features the complex tartness and deep purple hues of Jamun Wine. Spiced with a hint of black salt and balanced with lime and fresh mint.</p>
+        
+        <div class="recipe-expandable">
+          <button class="toggle-btn" onclick="toggleRecipe(this)">
+            <span>View Full Recipe</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </button>
+          <div class="expanded-content">
+            <h4 class="section-subtitle">Ingredients</h4>
+            <ul class="ingredients-list">
+              <li>120ml Sam's Jamun Wine</li>
+              <li>6-8 Fresh Mint leaves</li>
+              <li>2 Lime wheels</li>
+              <li>15ml Simple syrup (optional)</li>
+              <li>A pinch of Black Salt (Kala Namak)</li>
+              <li>Tonic water (to top)</li>
+            </ul>
+            <h4 class="section-subtitle">Instructions</h4>
+            <ol class="steps-list">
+              <li>In a tall highball glass, gently muddle the mint leaves, lime wheels, and simple syrup to release the oils.</li>
+              <li>Fill the glass to the brim with crushed ice.</li>
+              <li>Pour over Sam's Jamun Wine and sprinkle the pinch of black salt.</li>
+              <li>Top with chilled tonic water, stir gently from the bottom, and garnish with an extra sprig of fresh mint.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- RECIPE 3: MAHUA HONEYED ELIXIR -->
+    <article class="recipe-card" data-category="mahua">
+      <div class="recipe-img-wrapper">
+        <span class="pairing-tag tag-mahua">Mahua Wine</span>
+        <img src="images/mahua2.png" alt="Mahua Honeyed Elixir" class="recipe-img">
+        <div class="recipe-details-badges">
+          <span class="badge">Prep: 8 mins</span>
+          <span class="badge">Medium</span>
+        </div>
+      </div>
+      <div class="recipe-content">
+        <h3 class="recipe-title">Mahua Honeyed Elixir</h3>
+        <p class="recipe-desc">Celebrating the ancient spirit of Mahua blossoms. This luxurious drink infuses honey, fresh ginger, and lime with the honeyed warmth of Mahua Wine. Can be served cold or as a warm toddy.</p>
+        
+        <div class="recipe-expandable">
+          <button class="toggle-btn" onclick="toggleRecipe(this)">
+            <span>View Full Recipe</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </button>
+          <div class="expanded-content">
+            <h4 class="section-subtitle">Ingredients</h4>
+            <ul class="ingredients-list">
+              <li>90ml Sam's Mahua Wine</li>
+              <li>15ml Fresh Ginger juice</li>
+              <li>15ml Honey syrup (1:1 honey and warm water)</li>
+              <li>20ml Fresh Lemon juice</li>
+              <li>Club soda (cold option) OR 90ml hot water (warm option)</li>
+              <li>Lemon twist (garnish)</li>
+            </ul>
+            <h4 class="section-subtitle">Instructions</h4>
+            <ol class="steps-list">
+              <li>In a shaker filled with ice, combine Mahua Wine, fresh ginger juice, honey syrup, and lemon juice.</li>
+              <li>Shake vigorously for 15 seconds until well chilled, then strain into a rocks glass over a large ice sphere.</li>
+              <li>Top with a splash of club soda and garnish with a lemon twist.</li>
+              <li><strong>For Warm Serving:</strong> Stir all ingredients (except club soda) in a heatproof mug with 90ml of hot water. Garnish with a cinnamon stick or lemon wheel.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- RECIPE 4: STRAWBERRY BASIL BREEZE -->
+    <article class="recipe-card" data-category="strawberry">
+      <div class="recipe-img-wrapper">
+        <span class="pairing-tag tag-strawberry">Strawberry Wine</span>
+        <img src="images/strawberry3.png" alt="Strawberry Basil Breeze" class="recipe-img">
+        <div class="recipe-details-badges">
+          <span class="badge">Prep: 6 mins</span>
+          <span class="badge">Easy</span>
+        </div>
+      </div>
+      <div class="recipe-content">
+        <h3 class="recipe-title">Strawberry Basil Breeze</h3>
+        <p class="recipe-desc">A bright, aromatic mix that highlights the sweet, freshly-crushed berry character of Strawberry Wine, elevated with fresh green basil leaves and a sparkling finish.</p>
+        
+        <div class="recipe-expandable">
+          <button class="toggle-btn" onclick="toggleRecipe(this)">
+            <span>View Full Recipe</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </button>
+          <div class="expanded-content">
+            <h4 class="section-subtitle">Ingredients</h4>
+            <ul class="ingredients-list">
+              <li>120ml Sam's Strawberry Wine</li>
+              <li>3-4 Fresh Basil leaves</li>
+              <li>15ml Fresh Lemon juice</li>
+              <li>3 Sliced fresh Strawberries</li>
+              <li>Sparkling water or Prosecco to top</li>
+            </ul>
+            <h4 class="section-subtitle">Instructions</h4>
+            <ol class="steps-list">
+              <li>Place the fresh basil leaves and sliced strawberries at the bottom of a large wine glass.</li>
+              <li>Gently press them with a spoon or muddler to release juice and aromatics.</li>
+              <li>Fill the glass halfway with cubed ice, then pour in the fresh lemon juice and Sam's Strawberry Wine.</li>
+              <li>Top with a splash of sparkling water or Prosecco for extra effervescence. Garnish with a whole strawberry on the rim.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- FOOTER IMPORT -->
+<div id="footer-container"></div>
+
+<script>
+// Import footer.html
+fetch('footer.html')
+  .then(response => response.text())
+  .then(data => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data, 'text/html');
+    const footer = doc.querySelector('footer');
+    const styles = doc.querySelector('style');
+    
+    if (styles) {
+      document.head.appendChild(styles);
+    }
+    
+    document.getElementById('footer-container').appendChild(footer);
+  })
+  .catch(error => console.error('Error loading footer:', error));
+</script>
+
+<script src="./age-verification.js"></script>
+
+<script>
+  function openTab(category, btn) {
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.recipe-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.classList.remove('filtered-out');
+        card.style.animation = 'none';
+        card.offsetHeight; // trigger reflow
+        card.style.animation = 'cardFadeIn 0.6s forwards ease';
+      } else {
+        card.classList.add('filtered-out');
+      }
+    });
+  }
+
+  function toggleRecipe(btn) {
+    const content = btn.nextElementSibling;
+    btn.classList.toggle('active');
+    content.classList.toggle('active');
+    
+    const span = btn.querySelector('span');
+    if (content.classList.contains('active')) {
+      span.textContent = 'Hide Details';
+    } else {
+      span.textContent = 'View Full Recipe';
+    }
+  }
+</script>
+
+</body>
+</html>
